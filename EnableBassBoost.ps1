@@ -171,6 +171,8 @@ if (-not $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adm
             if($MyInvocation.BoundParameters[$key]) {
                 $arguments += " -$key"
             }
+        } elseif (($MyInvocation.BoundParameters[$key].GetType()) -eq [string]) {
+            $arguments += " -$key `"$($MyInvocation.BoundParameters[$key])`""
         } else {
             $arguments += " -$key " + $MyInvocation.BoundParameters[$key]
         }
